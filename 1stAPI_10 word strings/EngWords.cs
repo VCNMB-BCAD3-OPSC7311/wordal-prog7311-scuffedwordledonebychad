@@ -2,23 +2,21 @@
 
 namespace _1stAPI_10_word_strings
 {
-    public class Strings
+    public class EngWords : IWords
     {
-        private static readonly string[] Words = new[]
+        public static readonly string[] Words = new[]
        {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
-        private static Strings instance;
-        private Strings()
-        {
-        }
+        private static EngWords instance;
+       
 
-        public static Strings getInstance()
+        public static EngWords getInstance()
         {
 
             if (instance == null)
             {
-                instance = new Strings();
+                instance = new EngWords();
             }
             return instance;
         }

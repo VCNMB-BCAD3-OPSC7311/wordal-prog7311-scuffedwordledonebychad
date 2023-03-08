@@ -8,9 +8,13 @@ namespace _1stAPI_10_word_strings.Controllers //all, single rand and sorted alph
     [ApiController]
     public class ValuesController : ControllerBase
     {
-    
 
-        Strings str = Strings.getInstance();
+        string lang = "";
+
+       WordFactory wordFactory = new WordFactory();
+        IWords iwords;
+
+        Language language = new Language();
 
         private readonly ILogger<ValuesController> _logger;
 
@@ -19,21 +23,30 @@ namespace _1stAPI_10_word_strings.Controllers //all, single rand and sorted alph
             _logger = logger;
         }
 
-     
+        [HttpPost("SelectLanguage")]
+
+        public string Input(string Language)
+        {
+            language.Lang = Language;
+            return language.;
+        }
+
+
         [HttpGet("AllWords")]
         public IEnumerable<string> All()
         {
+            iwords = wordFactory.getWords("English");
+            return iwords.All();
 
-            return str.All();
-           
         }
 
-       
+
         [HttpGet("SingleRandomWord")]
         public string Single()
         {
-        
-            return str.Single();
+
+            iwords = wordFactory.getWords("Afrikaans");
+            return iwords.Single();
 
         }
 
@@ -42,9 +55,11 @@ namespace _1stAPI_10_word_strings.Controllers //all, single rand and sorted alph
         public IEnumerable<string> Aplha()
         {
 
-            return str.Sorted();
+            iwords = wordFactory.getWords("Xhosa");
+            return iwords.Sorted();
 
         }
 
+       
     }
 }

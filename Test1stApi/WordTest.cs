@@ -11,7 +11,7 @@ namespace Test1stApi
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        Strings str = Strings.getInstance();
+        EngWords str = EngWords.getInstance();
         [TestMethod]
         public void TestAll ()
         {
