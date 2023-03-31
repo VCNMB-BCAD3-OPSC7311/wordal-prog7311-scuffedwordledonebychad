@@ -2,10 +2,7 @@
 {
     public interface IWords
     {
-        string[] All();
+        string[] GetWords();
 
-        string[] Sorted();
-
-        string Single();
     }
 }

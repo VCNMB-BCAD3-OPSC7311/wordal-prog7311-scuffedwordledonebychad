@@ -9,12 +9,12 @@ namespace _1stAPI_10_word_strings.Controllers //all, single rand and sorted alph
     public class ValuesController : ControllerBase
     {
 
-        string lang = "";
+       
 
-       WordFactory wordFactory = new WordFactory();
+        WordFactory wordFactory = new WordFactory();
         IWords iwords;
 
-        Language language = new Language();
+        
 
         private readonly ILogger<ValuesController> _logger;
 
@@ -23,40 +23,61 @@ namespace _1stAPI_10_word_strings.Controllers //all, single rand and sorted alph
             _logger = logger;
         }
 
-        [HttpPost("SelectLanguage")]
-
-        public string Input(string Language)
+        [HttpPost("SendData")]
+        public string SendData()
         {
-            language.Lang = Language;
-            return language.;
-        }
+            //_logger.Log(LogLevel.Trace , Select);
+            //_logger.LogInformation(Select);
 
+            Item i = new Item();
+            
 
-        [HttpGet("AllWords")]
-        public IEnumerable<string> All()
-        {
-            iwords = wordFactory.getWords("English");
-            return iwords.All();
+            return i.PostNames(); 
 
         }
 
+        [HttpGet("Get5CharNames")]
+        public string[] Get5CharNames()
+        {
+            //_logger.Log(LogLevel.Trace , Select);
+            //_logger.LogInformation(Select);
 
-        [HttpGet("SingleRandomWord")]
-        public string Single()
+            Item i = new Item();
+
+         return i.Get5();
+           
+
+        }
+
+        [HttpGet("AllNames")]
+        public IEnumerable<string> All(String Select)
+        {
+            //_logger.Log(LogLevel.Trace , Select);
+            //_logger.LogInformation(Select);
+
+            iwords = wordFactory.getWords(Select);
+           
+            return Language.getInstance().All(iwords.GetWords());
+
+        }
+
+
+        [HttpGet("SingleRandomName")]
+        public string Single(String Select)
         {
 
-            iwords = wordFactory.getWords("Afrikaans");
-            return iwords.Single();
+            iwords = wordFactory.getWords(Select);
+            return Language.getInstance().Single(iwords.GetWords()); 
 
         }
 
 
         [HttpGet("AlphabeticalOrder")]
-        public IEnumerable<string> Aplha()
+        public IEnumerable<string> Aplha(String Select)
         {
 
-            iwords = wordFactory.getWords("Xhosa");
-            return iwords.Sorted();
+            iwords = wordFactory.getWords(Select);
+            return Language.getInstance().Sorted(iwords.GetWords());
 
         }
 

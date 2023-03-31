@@ -8,17 +8,17 @@
         {
             if (Language.ToLower().Equals("english"))
             {
-                returnInstance = new EngWords();
+                returnInstance = new EngNames();
 
 
             }
             else if (Language.ToLower().Equals("afrikaans"))
             {
-                returnInstance = new AfrWords();
+                returnInstance = new AfrNames();
             }
             else if (Language.ToLower().Equals("xhosa"))
             {
-                returnInstance = new XhosaWords();
+                returnInstance = new XhosaNames();
             }
 
             return returnInstance;

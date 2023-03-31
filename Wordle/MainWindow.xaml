@@ -1,0 +1,24 @@
+﻿<Window x:Class="Wordle.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wordle"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="txtGuess" HorizontalAlignment="Left" Margin="169,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" Height="50" FontSize="36"/>
+        <Label x:Name="lblText" Content="Enter your guess" HorizontalAlignment="Left" Margin="28,68,0,0" VerticalAlignment="Top" Height="26"/>
+        <Label x:Name="lblText_Copy" Content="Worlde Game with names that are only 5 letters " HorizontalAlignment="Left" Margin="105,10,0,0" VerticalAlignment="Top" Height="41" Width="538" FontSize="20"/>
+        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="284,124,0,0" VerticalAlignment="Top" Width="146" FontSize="18" Click="btnSubmit_Click"/>
+        <RichTextBox x:Name="txtResult" Margin="58,173,110,10" FontSize="20">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label x:Name="lblText_Copy1" Content="Rules &#x0a;( ) means right position &#x0a;{ } means letter is in word &#x0a;* * mean not in word at all" HorizontalAlignment="Left" Margin="609,24,0,0" VerticalAlignment="Top" Height="114" Width="181" FontSize="14" Background="Transparent" Foreground="#FFFF0E0E"/>
+
+    </Grid>
+</Window>
