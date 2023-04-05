@@ -22,10 +22,10 @@ namespace Wordle
     public partial class MainWindow : Window
     {
         static Random rand = new Random();
-        static string json = new WebClient().DownloadString("https://localhost:7082/api/Values/Get5CharNames");
-        static  string[] names = json.Split(',');
+        static string json = new WebClient().DownloadString("https://localhost:7082/api/Values/GetWords");
+        static  string[] words = json.Split(',');
 
-        int ran = rand.Next(names.Length);
+        int ran = rand.Next(words.Length);
         int count = 0;
         public MainWindow()
         {
@@ -38,14 +38,16 @@ namespace Wordle
         {
            
             string guess = txtGuess.Text;
-            string correctword = names[ran].Trim(new Char[] { '"', '[', ']' });
+            string correctword = words[ran].Trim(new Char[] { '"', '[', ']' }).ToLower();
+            txtGuess.Text = correctword;
             count++;
             if (guess.Length == 5)
             {
                 if(guess == correctword )
                 {
                     MessageBox.Show("You guessed the right name: " + correctword);
-                    ran = rand.Next(names.Length);
+                    ran = rand.Next(words.Length);
+                    count = 0;
                     txtResult.Document.Blocks.Clear();
                     txtGuess.Clear();
                 } else 
@@ -81,6 +83,7 @@ namespace Wordle
                             txtResult.Selection.Text += "\n";
                             
                         }
+                        //txtGuess.Clear();
                     }
                 }
             } 
@@ -94,13 +97,19 @@ namespace Wordle
             {
                 count = 0;
                 MessageBox.Show("You have reached your guesses , the answer is " + correctword);
-                txtResult.Document.Blocks.Clear();
+               
                 txtGuess.Clear();
-                ran = rand.Next(names.Length);
+                ran = rand.Next(words.Length);
             }
 
 
 
+        }
+
+        private void btnNew_Click(object sender, RoutedEventArgs e)
+        {
+            ran = rand.Next(words.Length);
+            txtResult.Document.Blocks.Clear();
         }
     }
 }

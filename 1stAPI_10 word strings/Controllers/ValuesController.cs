@@ -36,20 +36,20 @@ namespace _1stAPI_10_word_strings.Controllers //all, single rand and sorted alph
 
         }
 
-        [HttpGet("Get5CharNames")]
-        public string[] Get5CharNames()
+        [HttpGet("GetWords")]
+        public string[] GetWords()
         {
             //_logger.Log(LogLevel.Trace , Select);
             //_logger.LogInformation(Select);
 
             Item i = new Item();
 
-         return i.Get5();
+         return i.GetWords();
            
 
         }
 
-        [HttpGet("AllNames")]
+        [HttpGet("AllWords")]
         public IEnumerable<string> All(String Select)
         {
             //_logger.Log(LogLevel.Trace , Select);
@@ -62,7 +62,7 @@ namespace _1stAPI_10_word_strings.Controllers //all, single rand and sorted alph
         }
 
 
-        [HttpGet("SingleRandomName")]
+        [HttpGet("SingleRandomWord")]
         public string Single(String Select)
         {
 

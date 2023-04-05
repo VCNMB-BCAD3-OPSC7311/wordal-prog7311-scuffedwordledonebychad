@@ -10,20 +10,24 @@ namespace _1stAPI_10_word_strings
     public class Item
     {
 
-        string name = "";
+        string word = "";
         string type = "";
+        
+        public string Ejson = new WebClient().DownloadString("https://wordapidata.000webhostapp.com/?getnamesenglish");
 
-        public  string Ejson = new WebClient().DownloadString("https://wordapidata.000webhostapp.com/?getnamesenglish");
 
-       
 
-        public  string Xjson = new WebClient().DownloadString("https://wordapidata.000webhostapp.com/?getnamesxhosa");
+        public string Xjson = new WebClient().DownloadString("https://wordapidata.000webhostapp.com/?getnamesxhosa");
 
-      
 
-        public  string Ajson = new WebClient().DownloadString("https://wordapidata.000webhostapp.com/?getnamesafrikaans");
 
-       
+        public string Ajson = new WebClient().DownloadString("https://wordapidata.000webhostapp.com/?getnamesafrikaans");
+
+        //public class Words
+        //    {
+        //        string word { get; set; }
+               
+        //    }
 
         public string PostNames()
         {
@@ -33,21 +37,21 @@ namespace _1stAPI_10_word_strings
 
             for (int i = 0; i < Enames.Length; i++)
             {
-                name = Enames[i].Trim(new Char[] { '"', '[', ']' });
+                word = Enames[i].Trim(new Char[] { '"', '[', ']' });
                 type = "English";
                 SendData();
             }
 
-            for (int i = 0; i < Enames.Length; i++)
+            for (int i = 0; i < Anames.Length; i++)
             {
-                name = Anames[i].Trim(new Char[] { '"', '[', ']' });
+                word = Anames[i].Trim(new Char[] { '"', '[', ']' });
                 type = "Afrikaans";
                 SendData();
             }
 
             for (int i = 0; i < Xnames.Length; i++)
             {
-                name = Xnames[i].Trim(new Char[] { '"', '[', ']' });
+                word = Xnames[i].Trim(new Char[] { '"', '[', ']' });
                 type = "Xhosa";
                 SendData();
             }
@@ -77,7 +81,7 @@ namespace _1stAPI_10_word_strings
 
          
 
-                dbComm.Parameters.AddWithValue("@Name",name);
+                dbComm.Parameters.AddWithValue("@Name",word);
                 dbComm.Parameters.AddWithValue("@Type", type);
                
             
@@ -91,17 +95,17 @@ namespace _1stAPI_10_word_strings
         }
 
         
-       public string[] Get5()
+       public string[] GetWords()
         {
-            string[] FiveChar = new string[24]; 
-
+            int len = Ejson.Split(',').Length + Ajson.Split(',').Length + Xjson.Split(',').Length;
+            string[] word = new string[len];
             SqlConnection dbConn = new SqlConnection(connStr);
 
 
             dbConn.Open();
 
             //sql code to insert into table
-            string sql = "sp5CharWords";
+            string sql = "spGetWords";
             dbComm = new SqlCommand(sql, dbConn);
             dbComm.CommandType = CommandType.StoredProcedure;
 
@@ -112,7 +116,7 @@ namespace _1stAPI_10_word_strings
           
             while (dataReader.Read())
             {
-                FiveChar[i] = dataReader.GetValue(0).ToString();
+                word[i]  = dataReader.GetValue(0).ToString();
                 i++;
             }
 
@@ -122,7 +126,7 @@ namespace _1stAPI_10_word_strings
 
            
             dbConn.Close();
-            return FiveChar;
+            return word;
         }
     }
 }

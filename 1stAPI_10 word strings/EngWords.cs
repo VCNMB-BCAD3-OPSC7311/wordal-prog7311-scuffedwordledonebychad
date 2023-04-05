@@ -2,7 +2,7 @@
 
 namespace _1stAPI_10_word_strings
 {
-    public class EngNames : IWords
+    public class EngWords : IWords
     {
       
        

@@ -2,7 +2,7 @@
 
 namespace _1stAPI_10_word_strings
 {
-    public class XhosaNames : IWords
+    public class XhosaWords : IWords
     {
       
        
