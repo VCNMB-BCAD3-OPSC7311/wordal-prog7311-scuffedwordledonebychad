@@ -5,21 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wordle"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBox x:Name="txtGuess" HorizontalAlignment="Left" Margin="169,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" Height="50" FontSize="36"/>
-        <Label x:Name="lblText" Content="Enter your guess" HorizontalAlignment="Left" Margin="28,68,0,0" VerticalAlignment="Top" Height="26"/>
-        <Label x:Name="lblText_Copy" Content="Worlde Game with names that are only 5 letters " HorizontalAlignment="Left" Margin="105,10,0,0" VerticalAlignment="Top" Height="41" Width="538" FontSize="20"/>
-        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="200,130,0,0" VerticalAlignment="Top" Width="146" FontSize="18" Click="btnSubmit_Click"/>
-        <RichTextBox x:Name="txtResult" Margin="58,173,110,10" FontSize="15">
+        Title="MainWindow" Height="750" Width="1000">
+    <Grid Margin="0,-124,0,34">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="123*"/>
+            <ColumnDefinition Width="96*"/>
+            <ColumnDefinition Width="31*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="178*"/>
+            <RowDefinition Height="189*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="txtGuess" HorizontalAlignment="Left" Margin="312,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" Height="50" FontSize="36" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblText" Content="Enter your guess" HorizontalAlignment="Left" Margin="183,68,0,0" VerticalAlignment="Top" Height="26" Grid.Row="1"/>
+        <Label x:Name="lblText_Copy" Content="Worlde Game with names that are only 5 letters " HorizontalAlignment="Left" Margin="231,340,0,0" VerticalAlignment="Top" Height="41" Width="538" FontSize="20" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="312,9,0,0" VerticalAlignment="Top" Width="146" FontSize="18" Click="btnSubmit_Click" Grid.Row="1"/>
+        <RichTextBox x:Name="txtResult" Margin="206,176,82,31" FontSize="15" Grid.Row="1" Grid.ColumnSpan="2">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="RichTextBox"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <Label x:Name="lblText_Copy1" Content="Rules &#x0a;( ) means right position &#x0a;{ } means letter is in word &#x0a;* * mean not in word at all" HorizontalAlignment="Left" Margin="609,24,0,0" VerticalAlignment="Top" Height="114" Width="181" FontSize="14" Background="Transparent" Foreground="#FFFF0E0E"/>
-        <Button x:Name="btnNew" Content="New Game" HorizontalAlignment="Left" Margin="390,130,0,0" VerticalAlignment="Top" Width="146" FontSize="18" Click="btnNew_Click"/>
-
+        <Label x:Name="lblText_Copy1" Content="Rules &#x0a;( ) means right position &#x0a;{ } means letter is in word &#x0a;* * mean not in word at all" HorizontalAlignment="Left" Margin="228,347,0,0" VerticalAlignment="Top" Height="114" Width="180" FontSize="14" Background="Transparent" Foreground="#FFFF0E0E" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1" RenderTransformOrigin="0.422,1.29"/>
+        <Button x:Name="btnNew" Content="New Game" HorizontalAlignment="Left" Margin="8,9,0,0" VerticalAlignment="Top" Width="146" FontSize="18" Click="btnNew_Click" Grid.Row="1" Grid.Column="1"/>
+        <Label x:Name="lblText_Copy2" Content="SELECT LANGUAGE YOU WOULD TO PLAY IN" HorizontalAlignment="Left" Margin="116,220,0,0" VerticalAlignment="Top" Height="41" Width="538" FontSize="20" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="cbxLang" HorizontalAlignment="Left" Margin="76,230,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1">
+            <ComboBoxItem Content="English"/>
+            <ComboBoxItem Content="Afrikaans"/>
+            <ComboBoxItem Content="Xhosa"/>
+        </ComboBox>
     </Grid>
 </Window>

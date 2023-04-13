@@ -59,12 +59,12 @@ namespace _1stAPI_10_word_strings
             
             return "Data Sent";
         }
-        string connStr = "Data Source = st10085138server.database.windows.net; Initial Catalog = WordStringAPI; user = cka00; password = Password01"; //connect string for database
+        public string connStr = "Data Source = st10085138server.database.windows.net; Initial Catalog = WordStringAPI; user = cka00; password = Password01"; //connect string for database
       
-        SqlCommand dbComm;
-        SqlDataAdapter dbAdapter;
-        SqlDataReader dataReader;
-        DataTable dt;
+        public SqlCommand dbComm;
+        public SqlDataAdapter dbAdapter;
+        public SqlDataReader dataReader;
+        public DataTable dt;
 
         public void SendData()
         {
@@ -95,38 +95,38 @@ namespace _1stAPI_10_word_strings
         }
 
         
-       public string[] GetWords()
-        {
-            int len = Ejson.Split(',').Length + Ajson.Split(',').Length + Xjson.Split(',').Length;
-            string[] word = new string[len];
-            SqlConnection dbConn = new SqlConnection(connStr);
+       //public string[] GetWords() get all words, need to get languages seperately
+       // {
+       //     int len = Ejson.Split(',').Length + Ajson.Split(',').Length + Xjson.Split(',').Length;
+       //     string[] word = new string[len];
+       //     SqlConnection dbConn = new SqlConnection(connStr);
 
 
-            dbConn.Open();
+       //     dbConn.Open();
 
-            //sql code to insert into table
-            string sql = "spGetWords";
-            dbComm = new SqlCommand(sql, dbConn);
-            dbComm.CommandType = CommandType.StoredProcedure;
+           
+       //     string sql = "spGetWords";
+       //     dbComm = new SqlCommand(sql, dbConn);
+       //     dbComm.CommandType = CommandType.StoredProcedure;
 
             
 
-            dataReader = dbComm.ExecuteReader();
-            int i = 0;
+       //     dataReader = dbComm.ExecuteReader();
+       //     int i = 0;
           
-            while (dataReader.Read())
-            {
-                word[i]  = dataReader.GetValue(0).ToString();
-                i++;
-            }
+       //     while (dataReader.Read())
+       //     {
+       //         word[i]  = dataReader.GetValue(0).ToString();
+       //         i++;
+       //     }
 
           
-            dataReader.Close();
-            int x = dbComm.ExecuteNonQuery();
+       //     dataReader.Close();
+       //     int x = dbComm.ExecuteNonQuery();
 
            
-            dbConn.Close();
-            return word;
-        }
+       //     dbConn.Close();
+       //     return word;
+       // }
     }
 }

@@ -21,12 +21,6 @@ namespace Wordle
     /// </summary>
     public partial class MainWindow : Window
     {
-        static Random rand = new Random();
-        static string json = new WebClient().DownloadString("https://localhost:7082/api/Values/GetWords");
-        static  string[] words = json.Split(',');
-
-        int ran = rand.Next(words.Length);
-        int count = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -34,11 +28,27 @@ namespace Wordle
             txtResult.Document.Blocks.Clear();
         }
 
+         string RanAfr = new WebClient().DownloadString("https://localhost:7082/api/Values/SingleRandomWord?Select=Afrikaans");
+         string RanEng = new WebClient().DownloadString("https://localhost:7082/api/Values/SingleRandomWord?Select=English");
+         string RanXho = new WebClient().DownloadString("https://localhost:7082/api/Values/SingleRandomWord?Select=Xhosa");
+        string correctword = " ";
+        int count = 0;
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
            
             string guess = txtGuess.Text;
-            string correctword = words[ran].Trim(new Char[] { '"', '[', ']' }).ToLower();
+            
+            if (cbxLang.Text == "Afrikaans")
+            {
+                correctword = RanAfr;
+            }else if (cbxLang.Text == "English")
+            {
+                correctword = RanEng;
+            }
+            else
+            {
+                correctword = RanXho;
+            }
             txtGuess.Text = correctword;
             count++;
             if (guess.Length == 5)
@@ -46,7 +56,18 @@ namespace Wordle
                 if(guess == correctword )
                 {
                     MessageBox.Show("You guessed the right name: " + correctword);
-                    ran = rand.Next(words.Length);
+                    if (cbxLang.Text == "Afrikaans")
+                    {
+                        RanAfr = new WebClient().DownloadString("https://localhost:7082/api/Values/SingleRandomWord?Select=Afrikaans");
+                    }
+                    else if (cbxLang.Text == "English")
+                    {
+                        RanEng = new WebClient().DownloadString("https://localhost:7082/api/Values/SingleRandomWord?Select=English");
+                    }
+                    else
+                    {
+                        RanXho = new WebClient().DownloadString("https://localhost:7082/api/Values/SingleRandomWord?Select=Xhosa");
+                    }
                     count = 0;
                     txtResult.Document.Blocks.Clear();
                     txtGuess.Clear();
@@ -56,7 +77,7 @@ namespace Wordle
                     {
                         if (correctword[i] == guess[i])
                         {
-                          
+                            
                     
                             txtResult.Selection.Text += "\t(" + guess[i] + ")";
                            
@@ -90,16 +111,29 @@ namespace Wordle
             else
             {
                 MessageBox.Show("The word you guessed is either too short/long, try again");
+                count= 0;
                 txtGuess.Clear();
             }
 
             if(count == 5 && correctword != guess)
             {
+                if (cbxLang.Text == "Afrikaans")
+                {
+                    RanAfr = new WebClient().DownloadString("https://localhost:7082/api/Values/SingleRandomWord?Select=Afrikaans");
+                }
+                else if (cbxLang.Text == "English")
+                {
+                    RanEng = new WebClient().DownloadString("https://localhost:7082/api/Values/SingleRandomWord?Select=English");
+                }
+                else
+                {
+                    RanXho = new WebClient().DownloadString("https://localhost:7082/api/Values/SingleRandomWord?Select=Xhosa");
+                }
                 count = 0;
                 MessageBox.Show("You have reached your guesses , the answer is " + correctword);
-               
+                txtResult.Document.Blocks.Clear();
                 txtGuess.Clear();
-                ran = rand.Next(words.Length);
+               
             }
 
 
@@ -108,8 +142,23 @@ namespace Wordle
 
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
-            ran = rand.Next(words.Length);
+            if (cbxLang.Text == "Afrikaans")
+            {
+                RanAfr = new WebClient().DownloadString("https://localhost:7082/api/Values/SingleRandomWord?Select=Afrikaans");
+            }
+            else if (cbxLang.Text == "English")
+            {
+                RanEng = new WebClient().DownloadString("https://localhost:7082/api/Values/SingleRandomWord?Select=English");
+            }
+            else
+            {
+                RanXho = new WebClient().DownloadString("https://localhost:7082/api/Values/SingleRandomWord?Select=Xhosa");
+            }
+            count = 0;
+            txtGuess.Clear();
             txtResult.Document.Blocks.Clear();
         }
+
+       
     }
 }

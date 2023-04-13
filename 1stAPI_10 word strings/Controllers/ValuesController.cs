@@ -36,18 +36,6 @@ namespace _1stAPI_10_word_strings.Controllers //all, single rand and sorted alph
 
         }
 
-        [HttpGet("GetWords")]
-        public string[] GetWords()
-        {
-            //_logger.Log(LogLevel.Trace , Select);
-            //_logger.LogInformation(Select);
-
-            Item i = new Item();
-
-         return i.GetWords();
-           
-
-        }
 
         [HttpGet("AllWords")]
         public IEnumerable<string> All(String Select)

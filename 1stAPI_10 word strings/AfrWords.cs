@@ -1,21 +1,46 @@
-﻿using System.Xml.Linq;
+﻿using System.Data.SqlClient;
+using System.Data;
+using System.Xml.Linq;
 
 namespace _1stAPI_10_word_strings
 {
     public class AfrWords : IWords
     {
-      
-      
+
+
         public string[] GetWords()
         {
-            Item item = new Item();
+            Item db = new Item();
 
-            string[] Anames = item.Ajson.Split(',');
-            for (int i = 0; i < Anames.Length; i++)
+            SqlConnection dbConn = new SqlConnection(db.connStr);
+
+
+            dbConn.Open();
+
+
+            string sql = "spGetAfrWords";
+            db.dbComm = new SqlCommand(sql, dbConn);
+            db.dbComm.CommandType = CommandType.StoredProcedure;
+
+
+
+            db.dataReader = db.dbComm.ExecuteReader();
+            int i = 0;
+            List<string> words = new List<string>();
+            while (db.dataReader.Read())
             {
-                Anames[i] = Anames[i].Trim(new Char[] { '"', '[', ']' });
+                words.Add(db.dataReader.GetValue(0).ToString());
+
             }
-            return Anames;
+
+            string[] word = words.ToArray();
+
+            db.dataReader.Close();
+            int x = db.dbComm.ExecuteNonQuery();
+
+
+            dbConn.Close();
+            return word;
         }
     }
 }
